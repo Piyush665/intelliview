@@ -20,11 +20,6 @@ const authFormSchema = (type: FormType) => {
   });
 };
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-});
 
 const AuthForm = ({ type }: { type: FormType }) => {
     const router = useRouter();
@@ -44,9 +39,11 @@ const AuthForm = ({ type }: { type: FormType }) => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       if (type === "sign-up") {
+        console.log("Sign Up successfull: ", values)
         toast.success("Account created successfully. Please sign in");
         router.push("/sign-in");
       } else {
+        console.log("Sign In successfull: ", values)
         toast.success("Sign in successfully.");
         router.push("/");
       }
